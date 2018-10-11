@@ -1,0 +1,5 @@
+%h2= 'Projects:'
+- @projects.each do |project|
+  %h3= link_to project_path(project), project.name
+  %br
+  %p= project.body
