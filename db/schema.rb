@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -10,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20_181_003_161_427) do
+ActiveRecord::Schema.define(version: 20_181_009_145_319) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -33,6 +35,18 @@ ActiveRecord::Schema.define(version: 20_181_003_161_427) do
     t.index ['user_id'], name: 'index_comments_on_user_id'
   end
 
+  create_table 'lists', force: :cascade do |t|
+    t.string 'name'
+    t.integer 'project_id'
+    t.integer 'user_id'
+    t.integer 'position'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['position'], name: 'index_lists_on_position'
+    t.index ['project_id'], name: 'index_lists_on_project_id'
+    t.index ['user_id'], name: 'index_lists_on_user_id'
+  end
+
   create_table 'projects', force: :cascade do |t|
     t.string 'name'
     t.text 'description'
@@ -50,6 +64,10 @@ ActiveRecord::Schema.define(version: 20_181_003_161_427) do
     t.integer 'task_parent_id'
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.integer 'list_id'
+    t.integer 'position'
+    t.index ['list_id'], name: 'index_tasks_on_list_id'
+    t.index ['position'], name: 'index_tasks_on_position'
     t.index ['project_id'], name: 'index_tasks_on_project_id'
     t.index ['task_parent_id'], name: 'index_tasks_on_task_parent_id'
     t.index ['user_id'], name: 'index_tasks_on_user_id'
