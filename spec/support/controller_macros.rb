@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ControllerMacros
   def sign_in(user)
     @request.env['devise.mapping'] = Devise.mappings[:user]

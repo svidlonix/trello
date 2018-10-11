@@ -1,0 +1,3 @@
+
+#main-container.container
+  = tag.div id: :board, data: { project: @project.to_json(include: { lists: { include: :tasks } }) }
